@@ -228,17 +228,18 @@ def test_clean_data_docs_on_context_with_multiple_sites_with_no_site_name_cleans
     context_with_multiple_built_sites,
 ):
     context = context_with_multiple_built_sites
+    data_docs_dir = os.path.join(
+        context.root_directory,
+        context.GE_UNCOMMITTED_DIR,
+        "data_docs",
+    )
     assert context.clean_data_docs() is True
     for site in ["local_site", "another_local_site"]:
-        assert not os.path.isfile(
-            os.path.join(
-                context.root_directory,
-                context.GE_UNCOMMITTED_DIR,
-                "data_docs",
-                site,
-                "index.html",
-            )
-        )
+        site_dir = os.path.join(data_docs_dir, site)
+        assert not os.path.isfile(os.path.join(site_dir, "index.html"))
+        assert not os.path.isdir(site_dir)
+    # TODO Taylor / Anthony - this is the addition that exposes the behavior.
+    assert os.path.isdir(data_docs_dir)
 
 
 def test_clean_data_docs_on_context_with_multiple_sites_with_existing_site_name_cleans_selected_site_and_returns_true(
