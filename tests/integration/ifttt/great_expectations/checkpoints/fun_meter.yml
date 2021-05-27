@@ -17,6 +17,11 @@ action_list:
     action:
       class_name: UpdateDataDocsAction
       site_names: []
+  - name: trigger_doorbell
+    action:
+      class_name: IFTTTNotificationAction
+      module_name: great_expectations.checkpoint.actions
+      webhook: https://maker.ifttt.com/trigger/doorbell/with/key/bn_kYHJKH-jLW5ifchAs2O
 evaluation_parameters: {}
 runtime_configuration: {}
 validations:

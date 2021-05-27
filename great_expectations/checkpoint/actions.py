@@ -7,6 +7,8 @@ The only requirement from an action is for it to have a take_action method.
 import logging
 import warnings
 
+import requests
+
 try:
     import pypd
 except ImportError:
@@ -79,6 +81,51 @@ class NoOpAction(ValidationAction):
         self, validation_result_suite, validation_result_suite_identifier, data_asset
     ):
         print("Happily doing nothing")
+
+
+class IFTTTNotificationAction(ValidationAction):
+    def __init__(
+        self,
+        data_context,
+        webhook,
+    ):
+        super().__init__(data_context)
+        self.webhook = webhook
+        assert webhook, "No webhook found in action config."
+
+    def _run(
+        self,
+        validation_result_suite,
+        validation_result_suite_identifier,
+        data_asset=None,
+        payload=None,
+    ):
+        webhook = self.webhook
+        logger.debug("IFTTTNotificationAction.run")
+
+        session = requests.Session()
+
+        try:
+            response = session.post(url=webhook)
+        except requests.ConnectionError:
+            logger.warning(
+                "Failed to connect to IFTTT webhook at {url} "
+                "after {max_retries} retries.".format(url=webhook, max_retries=10)
+            )
+        except Exception as e:
+            logger.error(str(e))
+        else:
+            if response.status_code != 200:
+                logger.warning(
+                    "Request to IFTTT webhook at {url} "
+                    "returned error {status_code}: {text}".format(
+                        url=webhook,
+                        status_code=response.status_code,
+                        text=response.text,
+                    )
+                )
+            else:
+                return "IFTTT notification succeeded."
 
 
 class SlackNotificationAction(ValidationAction):
@@ -951,3 +998,4 @@ class UpdateDataDocsAction(ValidationAction):
             data_docs_validation_results[sites["site_name"]] = sites["site_url"]
 
         return data_docs_validation_results
+
