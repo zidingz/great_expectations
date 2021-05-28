@@ -125,7 +125,8 @@ class IFTTTNotificationAction(ValidationAction):
                     )
                 )
             else:
-                return "IFTTT notification succeeded."
+                return {"IFTTT_notification_result": "IFTTT notification succeeded."}
+        return {"IFTTT_notification_result": "No IFTTT notification sent."}
 
 
 class SlackNotificationAction(ValidationAction):
