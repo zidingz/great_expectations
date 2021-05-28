@@ -32,6 +32,13 @@ validations:
         index: -1
     expectation_suite_name: normal_data_failure
     action_list:
+      - name: sprinklers
+        action:
+          class_name: IFTTTNotificationAction
+          module_name: great_expectations.checkpoint.actions
+          webhook: https://maker.ifttt.com/trigger/{action}/with/key/c6YADilQ0B2UScfakMVIV3
+          action_if_pass: dummy
+          action_if_fail: make_it_rain
       - name: failure
         action:
           class_name: IFTTTNotificationAction

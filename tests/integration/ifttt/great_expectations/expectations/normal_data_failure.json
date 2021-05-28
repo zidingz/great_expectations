@@ -15,7 +15,7 @@
       "kwargs": {
         "column": "y",
         "max_value": 4,
-        "min_value": 2
+        "min_value": -4
       },
       "meta": {}
     }
