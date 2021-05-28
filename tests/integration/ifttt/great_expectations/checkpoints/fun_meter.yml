@@ -28,8 +28,8 @@ validations:
   - batch_request:
       datasource_name: csvs
       data_connector_name: csvs_example_data_connector
-      data_asset_name: off.csv
+      data_asset_name: normal_data_over_time.csv
       data_connector_query:
         index: -1
-    expectation_suite_name: hackathon
+    expectation_suite_name: normal_data
 profilers: []
