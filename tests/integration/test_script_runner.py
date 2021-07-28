@@ -1,6 +1,4 @@
 import enum
-
-# logger = get_logger_from_config_file()
 import logging
 import os
 import shutil
@@ -11,11 +9,11 @@ import pytest
 
 from assets.scripts.build_gallery import execute_shell_command
 from great_expectations.data_context.util import file_relative_path
+from tests.test_utils import get_logger_from_config_file
 
-# from tests.test_utils import get_logger_from_config_file
+logger = get_logger_from_config_file()
 
-
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 
 class BackendDependencies(enum.Enum):
