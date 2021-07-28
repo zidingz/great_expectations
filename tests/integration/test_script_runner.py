@@ -10,7 +10,9 @@ from assets.scripts.build_gallery import execute_shell_command
 from great_expectations.data_context.util import file_relative_path
 from tests.integration.util import get_logger_from_config_file
 
-logger = get_logger_from_config_file()
+#logger = get_logger_from_config_file()
+import logging
+logger = logging.logger(__name__)
 
 
 class BackendDependencies(enum.Enum):
