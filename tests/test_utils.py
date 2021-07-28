@@ -1,6 +1,7 @@
 import logging
 import os
 import uuid
+from logging import config
 from typing import List
 
 import numpy as np
@@ -380,3 +381,12 @@ def delete_config_from_filesystem(
         store_backend=store_backend_obj,
         configuration_key=configuration_key,
     )
+
+
+dirname = os.path.dirname(__file__)
+
+
+def get_logger_from_config_file():
+    config.fileConfig(os.path.join(dirname, "logging.conf"))
+    logger = logging.getLogger("docs")
+    return logger

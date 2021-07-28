@@ -1,8 +1,7 @@
-from tests.integration.util import get_logger_from_config_file
+from tests.test_utils import get_logger_from_config_file
 
-#logger = get_logger_from_config_file()
-import logging
-logger = logging.logger(__name__)
+logger = get_logger_from_config_file()
+
 
 def load_data_into_database(
     table_name: str, csv_path: str, connection_string: str
