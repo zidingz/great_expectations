@@ -1,6 +1,10 @@
-from tests.test_utils import get_logger_from_config_file
+# from tests.test_utils import get_logger_from_config_file
 
-logger = get_logger_from_config_file()
+# logger = get_logger_from_config_file()
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def load_data_into_database(
