@@ -6,19 +6,19 @@ import Congratulations from '/docs/guides/setup/components/install_congrats.md'
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide will help you Install Great Expectations locally for use with python
+This guide will help you Install Great Expectations locally for use with Python
 
 ## Steps
 
 ### 1. Install required dependencies
 
-First, check that you have python3 with pip installed
+First, check that you have Python3 with pip installed
 
 ```console
-python --version
-# or if multiple versions of python installed
-python3 --version
-python3 -m pip --version
+Python --version
+# or if multiple versions of Python installed
+Python3 --version
+Python3 -m pip --version
 ```
 
 ### 2. Install Great Expectations

@@ -18,7 +18,7 @@ Using checkpoints is the most straightforward way to trigger a validation run fr
 
 The following sections describe two alternative approaches to accomplishing this:
  1. [Running a checkpoint with a BashOperator](#option-1-running-a-checkpoint-with-a-bashoperator)
- 2. [Running the `checkpoint script` output with a PythonOperator](#option-2-running-the-checkpoint-script-output-with-a-pythonoperator)
+ 2. [Running the `checkpoint script` output with a PythonOperator](#option-2-running-the-checkpoint-script-output-with-a-Pythonoperator)
 
 Steps
 -----
@@ -27,7 +27,7 @@ Steps
 
 You can use a simple `BashOperator` in Airflow to trigger the checkpoint run. The following snippet shows an Airflow task for an Airflow DAG named `dag` that triggers the run of a checkpoint we named `my_checkpoint`:
 
-```python
+```Python
 validation_task = BashOperator(
     task_id='validation_task',
     bash_command='great_expectations --v3-api checkpoint run my_checkpoint',
@@ -46,21 +46,21 @@ Another option is to use the output of the `great_expectations --v3-api checkpoi
 
     ...
 
-    A python script was created that runs the checkpoint named: `my_checkpoint`
+    A Python script was created that runs the checkpoint named: `my_checkpoint`
     - The script is located in `great_expectations/uncommitted/my_checkpoint.py`
-    - The script can be run with `python great_expectations/uncommitted/my_checkpoint.py`
+    - The script can be run with `Python great_expectations/uncommitted/my_checkpoint.py`
     ```
 
 2. Navigate to the generated Python script and copy the content
 3. Create a method in your Airflow DAG file and call it from a PythonOperator:
 
-    ```python
+    ```Python
     def run_checkpoint():
         # paste content from the checkpoint script here
 
     task_run_checkpoint = PythonOperator(
         task_id='run_checkpoint',
-        python_callable=run_checkpoint,
+        Python_callable=run_checkpoint,
         dag=dag,
     )
     ```

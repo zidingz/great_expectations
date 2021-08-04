@@ -4,12 +4,12 @@ import TabItem from '@theme/TabItem';
 Get an environment to run the code in this guide. Please choose an option below.
 
 <Tabs
-  groupId="yaml-or-python"
+  groupId="yaml-or-Python"
   defaultValue='cli'
   values={[
   {label: 'CLI + filesystem', value:'cli'},
   {label: 'No CLI + filesystem', value:'yaml'},
-  {label: 'No CLI + no filesystem', value:'python'},
+  {label: 'No CLI + no filesystem', value:'Python'},
   ]}>
   <TabItem value="cli">
 
@@ -22,12 +22,12 @@ great_expectations --v3-api datasource new
 </TabItem>
 <TabItem value="yaml">
 
-If you use Great Expectations in an environment that has filesystem access, and prefer not to use the CLI, run the code in this guide in a notebook or other python script.
+If you use Great Expectations in an environment that has filesystem access, and prefer not to use the CLI, run the code in this guide in a notebook or other Python script.
 
 See [🍏 CORE SKILL ICON How to instantiate a Data Context](#) for details.
 
 </TabItem>
-<TabItem value="python">
+<TabItem value="Python">
 
 If you use Great Expectations in an environment that has no filesystem (such as Databricks or AWS EMR), run the code in this guide in that system's preferred way.
 

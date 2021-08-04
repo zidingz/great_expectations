@@ -40,7 +40,7 @@ Typically, a PR for a how-to-guide will contain the following:
 
 An example script is found in `/tests/integration/docusaurus/template/script_example.py`.
 
-```python file=../../../tests/integration/docusaurus/template/script_example.py#L1-L9
+```Python file=../../../tests/integration/docusaurus/template/script_example.py#L1-L9
 ```
 
 It does the following :
@@ -57,15 +57,15 @@ In order to run your how-to-guide script, you will to modify the file at `great-
 
 Each integration test is defined by a dictionary entry similar to the one below:
 
-```python
+```Python
 {
-    "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/filesystem/pandas_python_example.py",
+    "user_flow_script": "tests/integration/docusaurus/connecting_to_your_data/filesystem/pandas_Python_example.py",
     "data_context_dir": "tests/integration/fixtures/no_datasources/great_expectations",
     "data_dir": "tests/test_sets/taxi_yellow_trip_data_samples",
 },
 ```
 
-- The path to the `user_flow_script` is the path of the script we are adding; `pandas_python_example.py` in our case.
+- The path to the `user_flow_script` is the path of the script we are adding; `pandas_Python_example.py` in our case.
 - `data_context_dir` is a fixture that will be copied into a directory where your script will be run. It will ensure that you can load a `DataContext`, although no additional features will be included.
 - `data_dir` is an optional parameter for data files that you can use in your tests. The example contains the path to the NYC yellow taxi trip data, which is a fixture that is used in many tests for Great Expectations.
 
@@ -106,11 +106,11 @@ If the user has data in Mongo and wants to configure a Datasource, no additional
 - The following snippet displays line 1- line 7 of the `script_example.py` file.  
 
 ```markdown
-  ```python file=../../../tests/integration/docusaurus/template/script_example.py#L1-L7```
+  ```Python file=../../../tests/integration/docusaurus/template/script_example.py#L1-L7```
 ```
 
 :::warning
-Make sure that you lint your script before you finalize the line numbers in your Markdown file. This will prevent unintended line changes and save you pain when the linter changes your python file without you realizing it.
+Make sure that you lint your script before you finalize the line numbers in your Markdown file. This will prevent unintended line changes and save you pain when the linter changes your Python file without you realizing it.
 
 :::
 - Most steps will also require user input, such as a connection string that needs to be replaced, or a step that allows for testing (such as running `test_yaml_config()`).

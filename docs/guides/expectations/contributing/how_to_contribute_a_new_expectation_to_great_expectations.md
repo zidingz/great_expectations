@@ -74,13 +74,13 @@ Recently we introduced a fast-track release process for community contributed Ex
 
 Expectations contain a self diagnostic tool that will help you during development. The simplest way to run it is to execute the file as a standalone script. Note: if you prefer, you can also run it within a notebook or IDE.
 
-````python
-python expect_column_values_to_equal_three.py
+````Python
+Python expect_column_values_to_equal_three.py
 ````
 
 Running the script will execute the `run_diagnostics` method for your new class. Initially, it will just return:
 
-````python
+````Python
 {
   "description": {
     "camel_name": "ExpectColumnValuesToEqualThree",
@@ -111,7 +111,7 @@ From this point on, we will start filling in the pieces of your Expectation. You
 
 :::note
 * If you prefer to do your development in Jupyter Notebook and copy your Expectation into the file after you are done, you will run run_diagnostics directly in the notebook (instead of executing the file):
-````python
+````Python
 # TODO: replace the class name with your Expectation's class name
 diagnostics_report = ExpectColumnValuesToEqualThree().run_diagnostics()
 print(json.dumps(diagnostics_report, indent=2))
@@ -129,7 +129,7 @@ These examples serve a dual purpose:
 * provide test cases that the Great Expectations testing framework can execute automatically
 We will explain the structure of these tests using the example provided in one of the templates that implements `expect_column_values_to_equal_three`:
 
-````python
+````Python
 examples = [{
     "data": {
         "mostly_threes": [3, 3, 3, 3, 3, 3, 2, -1, None, None],
@@ -154,7 +154,7 @@ The value of `examples` is a list of examples.
 
 Each example is a dictionary with two keys:
 
-* `data`: defines the input data of the example as a table/data frame. In this example the table has one column named “mostly_threes” with 10 rows. If you define multiple columns, make sure that they have the same number of rows. If possible, include test data and tests that includes null values (None in the python test definition).
+* `data`: defines the input data of the example as a table/data frame. In this example the table has one column named “mostly_threes” with 10 rows. If you define multiple columns, make sure that they have the same number of rows. If possible, include test data and tests that includes null values (None in the Python test definition).
 
 * `tests`: a list of test cases that use the data defined above as input to validate
 	* `title` should be a descriptive name for the test case. Make sure to have no spaces.
@@ -207,7 +207,7 @@ Expectations that extend ColumnMapExpectation class work as follows:
 
 * `ExpectColumnValuesToEqualThree` class that the template implements declares that the metric that maps each row in the column to the answer to its yes/no question is called `column_values.equal_three`:
 
-````python
+````Python
 map_metric = "column_values.equal_three"
 ````
 
@@ -223,7 +223,7 @@ Search for `class ColumnValuesEqualThree` and rename it to ColumnValues<CamelCas
 
 The Metric Provider class declares the condition metric that it can compute. “Condition metric” is a metric that answers a yes/no question:
 
-````python
+````Python
 condition_metric_name = "column_values.equal_three"
 ````
 
@@ -320,7 +320,7 @@ Expectations that extend ColumnExpectation class are evaluated for a single colu
 
 Define success_keys of your Expectation
 
-````python
+````Python
 success_keys = ("min_value", "strict_min", "max_value", "strict_max")
 ````
 
@@ -328,7 +328,7 @@ Expectations rely on Metrics to produce their result. A Metric is any observable
 
 * `ExpectColumnCustomMedianToBeBetween` class that the template implements declares the list of Metrics it needs computes for producing its result:
 
-````python
+````Python
 metric_dependencies = ("column.custom.median",)
 ````
 
@@ -345,7 +345,7 @@ Search for `class ColumnCustomMedian` and rename it to Column<CamelCase version 
 
 The Metric Provider class declares the metric that it can compute.
 
-````python
+````Python
 metric_name = "column.custom.median"
 ````
 
@@ -364,7 +364,7 @@ If you have never used Python Decorators and don’t know what they are and how 
 
 Find the following code snippet in your Metric Provider class:
 
-````python
+````Python
 @column_aggregate_value(engine=PandasExecutionEngine)
 def _pandas(cls, column, **kwargs):
     """Pandas Median Implementation"""

@@ -33,7 +33,7 @@ If your metric does not yet exist within the framework, you will need to impleme
 
 Below lies the full implementation of an aggregate metric class, with implementations for Pandas, SQLAlchemy, and Apache Spark dialects. (Other implementations can be found in the dictionary of metrics).
 
-````python
+````Python
 from great_expectations.execution_engine import (
    PandasExecutionEngine,
    SparkDFExecutionEngine,
@@ -85,7 +85,7 @@ Add the following attributes to your Expectation class:
 
 An example of Expectation Parameters is shown below (notice that we are now in a new Expectation class and building our Expectation in a separate file from our Metric):
 
-````python
+````Python
 class ExpectColumnMaxToBeBetweenCustom(ColumnExpectation):
    # Setting necessary computation metric dependencies and defining kwargs, as well as assigning kwargs default values
    metric_dependencies = ("column.aggregate.custom.max",)
@@ -109,7 +109,7 @@ We have almost reached the end of our journey in implementing an Expectation! No
 
 In this method, the user provides a configuration and we check that certain conditions are satisfied by the configuration. For example, if the user has given us a minimum and maximum threshold, it is important to verify that our minimum threshold does not exceed our maximum threshold:
 
-````python
+````Python
 def validate_configuration(self, configuration: Optional[ExpectationConfiguration]):
    """
    Validates that a configuration has been set, and sets a configuration if it has yet to be set. Ensures that
@@ -163,7 +163,7 @@ In this step, we simply need to validate that the results of our metrics meet ou
 
 The validate method is implemented as _validate. This method takes a dictionary named Metrics, which contains all metrics requested by your metric dependencies, and performs a simple validation against your success keys (i.e. important thresholds) in order to return a dictionary indicating whether the Expectation has evaluated successfully or not:
 
-````python
+````Python
 def _validate(
    self,
    configuration: ExpectationConfiguration,
@@ -212,9 +212,9 @@ It is often helpful to generate examples showing the functionality of your Expec
 
 If you plan on contributing your Expectation back to the library of main Expectations, you should build a JSON test for it in the `tests/test_definitions/name_of_your_expectation directory`.
 
-#### 7. Import: To use a custom Expectation, you need to ensure it has been imported into the running python interpreter. While including the module in your plugins/ directory will make it *available* to import, you must still import the Expectation:
+#### 7. Import: To use a custom Expectation, you need to ensure it has been imported into the running Python interpreter. While including the module in your plugins/ directory will make it *available* to import, you must still import the Expectation:
 
-````python
+````Python
 # get a validator
 # Note: attempting to run our expectation now would fail, because even though
 # our Expectation is in our DataContext plugins/ directory it has not been imported.
