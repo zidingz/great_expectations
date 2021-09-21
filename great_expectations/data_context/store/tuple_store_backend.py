@@ -679,6 +679,8 @@ class TupleS3StoreBackend(TupleStoreBackend):
 
         s3 = self._create_resource()
         s3_object_key = self._build_s3_object_key(key)
+        # TODO: AJB 20210921 REMOVE THIS PRINT STATEMENT
+        print("key", key, "s3_object_key", s3_object_key, "self.bucket", self.bucket)
         s3.Object(self.bucket, s3_object_key).delete()
         if s3_object_key:
             try:
@@ -686,6 +688,8 @@ class TupleS3StoreBackend(TupleStoreBackend):
                 objects_to_delete = s3.meta.client.list_objects_v2(
                     Bucket=self.bucket, Prefix=self.prefix
                 )
+                # TODO: AJB 20210921 REMOVE THIS PRINT STATEMENT
+                print("objects_to_delete", objects_to_delete)
 
                 delete_keys = {
                     "Objects": [
@@ -695,6 +699,8 @@ class TupleS3StoreBackend(TupleStoreBackend):
                         ]
                     ]
                 }
+                # TODO: AJB 20210921 REMOVE THIS PRINT STATEMENT
+                print("delete_keys", delete_keys)
                 s3.meta.client.delete_objects(Bucket=self.bucket, Delete=delete_keys)
                 return True
             except ClientError as e:
