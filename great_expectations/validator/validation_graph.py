@@ -56,33 +56,35 @@ class ExpectationValidationGraph:
         self._configuration = configuration
         self._graph = ValidationGraph()
 
-    def incorporate_edges(self, graph: ValidationGraph):
+    def update(self, graph: ValidationGraph):
         edge: MetricEdge
         for edge in graph.edges:
             self.graph.add(edge=edge)
 
-    def get_exception_infos(
+    def get_exception_info(
         self,
-        metric_infos: Dict[
-            Tuple[str, str, str], Dict[str, Union[MetricConfiguration, Set[ExceptionInfo], int]]
+        metric_info: Dict[
+            Tuple[str, str, str],
+            Dict[str, Union[MetricConfiguration, Set[ExceptionInfo], int]],
         ],
     ) -> Set[ExceptionInfo]:
-        metric_infos = self._filter_metric_infos_in_graph(metric_infos=metric_infos)
-        metric_exception_infos: Set[ExceptionInfo] = set()
+        metric_info = self._filter_metric_info_in_graph(metric_info=metric_info)
+        metric_exception_info: Set[ExceptionInfo] = set()
         metric_id: str
         metric_info: Dict[str, Union[MetricConfiguration, Set[ExceptionInfo], int]]
         exception_info: ExceptionInfo
-        for metric_id, metric_info in metric_infos.items():
-            metric_exception_infos.update(
-                cast(Set[ExceptionInfo], metric_info["exception_infos"])
+        for metric_id, metric_info in metric_info.items():
+            metric_exception_info.update(
+                cast(Set[ExceptionInfo], metric_info["exception_info"])
             )
 
-        return metric_exception_infos
+        return metric_exception_info
 
-    def _filter_metric_infos_in_graph(
+    def _filter_metric_info_in_graph(
         self,
-        metric_infos: Dict[
-            Tuple[str, str, str], Dict[str, Union[MetricConfiguration, Set[ExceptionInfo], int]]
+        metric_info: Dict[
+            Tuple[str, str, str],
+            Dict[str, Union[MetricConfiguration, Set[ExceptionInfo], int]],
         ],
     ) -> Dict[Tuple, Dict[str, Union[MetricConfiguration, Set[ExceptionInfo], int]]]:
         graph_metric_ids: List[Tuple[str, str, str]] = []
@@ -95,7 +97,7 @@ class ExpectationValidationGraph:
 
         return {
             metric_id: metric_info
-            for metric_id, metric_info in metric_infos.items()
+            for metric_id, metric_info in metric_info.items()
             if metric_id in graph_metric_ids
         }
 
