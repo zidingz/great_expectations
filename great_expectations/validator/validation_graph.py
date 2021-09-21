@@ -64,7 +64,7 @@ class ExpectationValidationGraph:
     def get_exception_infos(
         self,
         metric_infos: Dict[
-            Tuple, Dict[str, Union[MetricConfiguration, Set[ExceptionInfo], int]]
+            Tuple[str, str, str], Dict[str, Union[MetricConfiguration, Set[ExceptionInfo], int]]
         ],
     ) -> Set[ExceptionInfo]:
         metric_infos = self._filter_metric_infos_in_graph(metric_infos=metric_infos)
@@ -82,7 +82,7 @@ class ExpectationValidationGraph:
     def _filter_metric_infos_in_graph(
         self,
         metric_infos: Dict[
-            Tuple, Dict[str, Union[MetricConfiguration, Set[ExceptionInfo], int]]
+            Tuple[str, str, str], Dict[str, Union[MetricConfiguration, Set[ExceptionInfo], int]]
         ],
     ) -> Dict[Tuple, Dict[str, Union[MetricConfiguration, Set[ExceptionInfo], int]]]:
         graph_metric_ids: List[Tuple[str, str, str]] = []
